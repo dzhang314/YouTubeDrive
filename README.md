@@ -1,4 +1,6 @@
-# YouTubeDrive
+![YouTubeDrive Banner](https://user-images.githubusercontent.com/4504054/27016629-b9306d52-4ee7-11e7-96e5-7026eabc45de.png)
+
+--------------------------------------------------------------------------------
 
 **YouTubeDrive** is a Wolfram Language (aka *Mathematica*) package that encodes/decodes arbitrary data to/from simple RGB videos which are automatically uploaded to/downloaded from YouTube. Since YouTube imposes no limits on the total number or of videos users can upload, this provides an effectively infinite but extremely slow form of file storage.
 
