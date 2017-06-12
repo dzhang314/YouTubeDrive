@@ -6,6 +6,14 @@
 
 YouTubeDrive is a silly proof-of-concept, and I do not endorse its high-volume use.
 
+## Usage Example
+
+![Usage Example](https://user-images.githubusercontent.com/4504054/27015901-fc81875c-4ede-11e7-9f99-3b7f7f4d4939.png)
+
+**NOTE:** A short time needs to pass between calls to `YouTubeUpload` and `YouTubeRetrieve` for YouTube to process the uploaded video. I find that 5-10 minutes suffices for small (less than 10MB) file uploads.
+
+The video **YouTubeDrive** produces in this example can be viewed at https://www.youtube.com/watch?v=Fmm1AeYmbNU.
+
 ## Installation
 
  * Install [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/) as your operating system dictates.
