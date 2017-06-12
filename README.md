@@ -9,6 +9,7 @@ YouTubeDrive is a silly proof-of-concept, and I do not endorse its high-volume u
 ## Installation
 
  * Install [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/) as your operating system dictates.
+ * Find an arbitrary test video, say `test.mp4`, and run `youtube-upload --title="Test Video" test.mp4`. Follow the displayed instructions to create an OAuth token for your YouTube account. This will be the YouTube account used for all **YouTubeDrive** uploads.
  * Download and open `YouTubeDrive.wl` from this repository.
  * In lines 74-76, enter the install locations of the [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/) executables. Make sure to use proper string escape sequences (in particular, backslashes `\` need to be escaped as double-backslashes `\\` in Windows paths).
     ```
