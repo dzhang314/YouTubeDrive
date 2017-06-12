@@ -71,11 +71,9 @@ Begin["`Private`"];
 
 (* After installing FFmpeg, youtube-upload, and youtube-dl, set the following
    variables to the install locations of the corresponding programs. *)
-FFmpegExecutablePath = "C:\\Games\\MiscExes\\ffmpeg.exe";
-YouTubeUploadExecutablePath = Sequence["python",
-  "C:\\Users\\dzhan\\AppData\\Local\\Programs\\" <>
-      "Python\\Python35\\Scripts\\youtube-upload.py"];
-YouTubeDLExecutablePath = "C:\\Games\\MiscExes\\youtube-dl.exe";
+FFmpegExecutablePath = "FFMPEG_PATH_HERE";
+YouTubeUploadExecutablePath = "YOUTUBE-UPLOAD_PATH_HERE";
+YouTubeDLExecutablePath = "YOUTUBE-DL_PATH_HERE";
 
 
 YouTubeUpload[data_ByteArray] := Module[{
