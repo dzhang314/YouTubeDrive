@@ -2,7 +2,7 @@
 
 --------------------------------------------------------------------------------
 
-**YouTubeDrive** is a Wolfram Language (aka *Mathematica*) package that encodes/decodes arbitrary data to/from simple RGB videos which are automatically uploaded to/downloaded from YouTube. Since YouTube imposes no limits on the total number or of videos users can upload, this provides an effectively infinite but extremely slow form of file storage.
+**YouTubeDrive** is a Wolfram Language (aka *Mathematica*) package that encodes/decodes arbitrary data to/from simple RGB videos which are automatically uploaded to/downloaded from YouTube. Since YouTube imposes no limits on the total number or length of videos users can upload, this provides an effectively infinite but extremely slow form of file storage.
 
 **YouTubeDrive** depends externally on [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/). These programs must be downloaded and installed separately, and prior to first use, **YouTubeDrive** must be configured with their install locations. See below for details.
 
