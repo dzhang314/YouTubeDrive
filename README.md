@@ -21,19 +21,19 @@ The video **YouTubeDrive** produces in this example can be viewed at https://www
  * Install [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/) as your operating system dictates.
  * Find an arbitrary test video, say `test.mp4`, and run `youtube-upload --title="Test Video" test.mp4`. Follow the displayed instructions to create an OAuth token for your YouTube account. This will be the YouTube account used for all **YouTubeDrive** uploads.
  * Download and open `YouTubeDrive.wl` from this repository.
- * In lines 74-76, enter the install locations of the [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/) executables. Make sure to use proper string escape sequences (in particular, backslashes `\` need to be escaped as double-backslashes `\\` in Windows paths).
+ * In lines 75-77, enter the install locations of the [FFmpeg](https://ffmpeg.org/), [youtube-upload](https://github.com/tokland/youtube-upload), and [youtube-dl](https://rg3.github.io/youtube-dl/) executables. Make sure to use proper string escape sequences (in particular, backslashes `\` need to be escaped as double-backslashes `\\` in Windows paths).
     ```
-    74 | FFmpegExecutablePath = "FFMPEG_PATH_HERE";
-    75 | YouTubeUploadExecutablePath = "YOUTUBE-UPLOAD_PATH_HERE";
-    76 | YouTubeDLExecutablePath = "YOUTUBE-DL_PATH_HERE";
+    75 | FFmpegExecutablePath = "FFMPEG_PATH_HERE";
+    76 | YouTubeUploadExecutablePath = "YOUTUBE-UPLOAD_PATH_HERE";
+    77 | YouTubeDLExecutablePath = "YOUTUBE-DL_PATH_HERE";
     ```
    For example, I use the following install locations on my system (Windows 10):
     ```
-    74 | FFmpegExecutablePath = "C:\\Games\\MiscExes\\ffmpeg.exe";
-    75 | YouTubeUploadExecutablePath = Sequence["python",
-    76 |   "C:\\Users\\dzhan\\AppData\\Local\\Programs\\" <>
-    77 |       "Python\\Python35\\Scripts\\youtube-upload.py"];
-    78 | YouTubeDLExecutablePath = "C:\\Games\\MiscExes\\youtube-dl.exe";
+    75 | FFmpegExecutablePath = "C:\\Games\\MiscExes\\ffmpeg.exe";
+    76 | YouTubeUploadExecutablePath = Sequence["python",
+    77 |   "C:\\Users\\dzhan\\AppData\\Local\\Programs\\" <>
+    78 |       "Python\\Python35\\Scripts\\youtube-upload.py"];
+    79 | YouTubeDLExecutablePath = "C:\\Games\\MiscExes\\youtube-dl.exe";
     ```
    Note the use of `Sequence[]` to call `python youtube-upload.py` above.
  * After making the above edits, open `YouTubeDrive.wl` with *Mathematica*. Then, open the **File ⇨ Install...** dialog, and select the following options:
