@@ -3,9 +3,9 @@
 (* :Title: YouTubeDrive *)
 (* :Context: YouTubeDrive` *)
 (* :Author: David K. Zhang *)
-(* :Date: 2017-06-11 *)
+(* :Date: 2017-06-12 *)
 
-(* :Package Version: 1.0 *)
+(* :Package Version: 1.1 *)
 (* :Wolfram Language Version: 11.0 *)
 
 (* :Summary: YouTubeDrive is a Wolfram Language package that encodes/decodes
@@ -63,17 +63,20 @@ YouTubeRetrieve::dlerr = "YouTubeRetrieve was unable to download the \
 requested video with ID `1`. Make sure that this is a valid video ID, \
 and that the associated video is publicly viewable in your region.";
 
-YouTubeUpload::nbarr = "The first argument of YouTubeRetrieve must be a \
+YouTubeRetrieve::nstr = "The first argument of YouTubeRetrieve must be a \
 string.";
 
 
 Begin["`Private`"];
 
+
 (* After installing FFmpeg, youtube-upload, and youtube-dl, set the following
    variables to the install locations of the corresponding programs. *)
-FFmpegExecutablePath = "FFMPEG_PATH_HERE";
-YouTubeUploadExecutablePath = "YOUTUBE-UPLOAD_PATH_HERE";
-YouTubeDLExecutablePath = "YOUTUBE-DL_PATH_HERE";
+FFmpegExecutablePath = "C:\\Games\\MiscExes\\ffmpeg.exe";
+YouTubeUploadExecutablePath = Sequence["python",
+  "C:\\Users\\dzhan\\AppData\\Local\\Programs\\" <>
+      "Python\\Python35\\Scripts\\youtube-upload.py"];
+YouTubeDLExecutablePath = "C:\\Games\\MiscExes\\youtube-dl.exe";
 
 
 YouTubeUpload[data_ByteArray] := Module[{
@@ -94,25 +97,27 @@ YouTubeUpload[data_ByteArray] := Module[{
   frame[i_Integer] := Image[row /@
       Range[numRowsPerFrame (i - 1) + 1, numRowsPerFrame * i]];
 
-  finalFullRows = row /@ Range[numRowsPerFrame * numFrames + 1, numRows];
-  leftoverBits = Join @@ IntegerDigits[
-    Normal@data[[-numLeftoverBytes ;;]], 2, 8];
-  finalPartialRow = Partition[
-    PadRight[leftoverBits, 8 * numBytesPerRow, 1 / 2], 3];
-  finalFrameData = Append[finalFullRows, finalPartialRow];
-  finalFrame = Image@Join[finalFrameData, ConstantArray[1 / 2,
-    {numRowsPerFrame - Length[finalFrameData], (8 / 3) * numBytesPerRow, 3}]];
+  If[numLeftoverBytes > 0,
+    finalFullRows = row /@ Range[numRowsPerFrame * numFrames + 1, numRows];
+    leftoverBits = Join @@ IntegerDigits[
+      Normal@data[[-numLeftoverBytes ;;]], 2, 8];
+    finalPartialRow = Partition[
+      PadRight[leftoverBits, 8 * numBytesPerRow, 1 / 2], 3];
+    finalFrameData = Append[finalFullRows, finalPartialRow];
+    finalFrame = Image@Join[finalFrameData, ConstantArray[1 / 2,
+      {numRowsPerFrame - Length[finalFrameData],
+        (8 / 3) * numBytesPerRow, 3}]]];
 
   Monitor[Do[Image`ImportExportDump`ImageWritePNG[
     "frame_" <> IntegerString[i, 10, numDigits] <> ".png", frame[i]],
     {i, numFrames}], ProgressIndicator[i, {1, numFrames}]];
 
-  Image`ImportExportDump`ImageWritePNG[
+  If[numLeftoverBytes > 0, Image`ImportExportDump`ImageWritePNG[
     "frame_" <> IntegerString[numFrames + 1, 10, numDigits] <> ".png",
-    finalFrame];
+    finalFrame]];
 
   Run[FFmpegExecutablePath,
-    "-i", "frame_%0" <> ToString@Ceiling@Log10[numFrames + 1] <> "d.png",
+    "-i", "frame_%0" <> ToString[numDigits] <> "d.png",
     "-c:v", "libx264", "-preset", "ultrafast",
     "-vf", "scale=1280:720", "-sws_flags", "neighbor", "data.mp4"];
 
@@ -177,7 +182,7 @@ YouTubeRetrieve[videoId_String] := Module[{
 
 
 YouTubeRetrieve[arg_] := (
-  Message[YouTubeRetrieve::nbarr];
+  Message[YouTubeRetrieve::nstr];
   $Failed);
 
 
