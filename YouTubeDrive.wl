@@ -71,9 +71,11 @@ Begin["`Private`"];
 
 (* After installing FFmpeg, youtube-upload, and youtube-dl, set the following
    variables to the install locations of the corresponding programs. *)
-FFmpegExecutablePath = "FFMPEG_PATH_HERE";
-YouTubeUploadExecutablePath = "YOUTUBE-UPLOAD_PATH_HERE";
-YouTubeDLExecutablePath = "YOUTUBE-DL_PATH_HERE";
+FFmpegExecutablePath = "C:\\Games\\MiscExes\\ffmpeg.exe";
+YouTubeUploadExecutablePath = Sequence["python",
+  "C:\\Users\\dzhan\\AppData\\Local\\Programs\\" <>
+      "Python\\Python35\\Scripts\\youtube-upload.py"];
+YouTubeDLExecutablePath = "C:\\Games\\MiscExes\\youtube-dl.exe";
 
 
 YouTubeUpload[data_ByteArray] := Module[{
@@ -86,7 +88,7 @@ YouTubeUpload[data_ByteArray] := Module[{
 
   {numRows, numLeftoverBytes} = QuotientRemainder[Length[data], numBytesPerRow];
   {numFrames, numLeftoverRows} = QuotientRemainder[numRows, numRowsPerFrame];
-  numDigits = Ceiling@Log10[numFrames + 1];
+  numDigits = Ceiling@Log10[numFrames + 2];
 
   row[i_Integer] := Partition[Join @@ IntegerDigits[
     Normal@data[[numBytesPerRow * (i - 1) + 1 ;; numBytesPerRow * i]],
@@ -114,7 +116,7 @@ YouTubeUpload[data_ByteArray] := Module[{
   Run[FFmpegExecutablePath,
     "-i", "frame_%0" <> ToString@Ceiling@Log10[numFrames + 1] <> "d.png",
     "-c:v", "libx264", "-preset", "ultrafast",
-    "-vf", "scale=1280:720", "-sws_flags", "'neighbor'", "data.mp4"];
+    "-vf", "scale=1280:720", "-sws_flags", "neighbor", "data.mp4"];
 
   procInfo = RunProcess[{YouTubeUploadExecutablePath,
     "--title=\"DATA-" <> ToUpperCase@CreateUUID[] <> "\"",
