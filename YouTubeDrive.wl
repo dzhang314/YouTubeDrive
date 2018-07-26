@@ -23,7 +23,7 @@
              YouTubeDrive is a silly proof-of-concept, and I do not endorse
              its high-volume use. *)
 
-(* :Copyright: (c) 2017 David K. Zhang
+(* :Copyright: (c) 2017-2018 David K. Zhang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -190,4 +190,4 @@ YouTubeRetrieve[args___] := (
 
 
 End[]; (* `Private` *)
-EndPackage[];
+EndPackage[]; (* YouTubeDrive` *)
